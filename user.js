@@ -14,21 +14,20 @@ User.prototype.getWinTimes = () => {
     return this.winTimes;
 };
 
-User.prototype.getWinTimes = () => {
-    return this.winTimes;
+User.prototype.getCard = () => {
+    return this.card;
 };
 
 User.prototype.win = () => {
     return this.winTimes ++;
 };
 
-User.prototype.removeCard = () => {
-    this.card = null;
-};
+User.prototype.getWinTimes = () => {
+    return this.winTimes;
 };
 
-User.prototype.getCard = () => {
-    return this.card;
+User.prototype.removeCard = () => {
+    this.card = null;
 };
 
 module.exports = {

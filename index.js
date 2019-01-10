@@ -24,8 +24,8 @@ userRouter.post('/', function(req, res){
     console.log('user: ' + req.body.username);
     //console.log('with card: '+ req.body.card);
     // check exist user
-    var picked = users.some(e => e.username == req.body.username);
-    if (typeof picked !== 'undefined' && picked !== null ){
+    console.log('yy '+users);
+    if (!users.some(e => e.username === req.body.username) ){
         users.push(new user.User(req.body.username));
     }
     console.log(users);
