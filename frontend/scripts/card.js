@@ -1,78 +1,55 @@
-var cardModule = () => {
-    var Card = (id) => {
-        this.id = id;
-        this.cardNumbers = [];
-        this.availableNumbers = [];
-    }
+function Card(id) {
+    this.id = id;
+    this.cardNumbers = new Array();
+}
 
-    Card.prototype = () => {
-        var initAvailableNumbers = () => {
-            for (var i = 0; i <= 99; i++) {
-                this.availableNumbers[i] = (i + 1);
+Card.prototype = () => {
+    var generateCardNumbers = () => {
+        var tempCardNumbers;
+        var generatedValidation = (() => {
+            var temp = new Array(9);
+            for (var i = 0; i <= 9; i++) {
+                temp.push(0);
             }
-        }
+            return temp;
+        })();
+        var randomNumber;
+        var whileControlVariable = true;
 
-        var eliminateNumber = (number) => {
-            this.availableNumbers[number - 1] = null;
-        }
+        console.log("Card Generation - Starting random number generation.")
+        for (var i = 0; i <= 14; i++) {
 
-        var generateCardNumbers = (numOfRows) => {
-            for (var i = 0; i <= numOfRows; i++) {
+            randomNumber = Math.floor(Math.random() * (99 - 1 + 1) + 1);
+            console.log("Card Generation - Generated number: " + randomNumber + ".");
 
+            console.log("Card Generation - Executing duplicate check..");
+            while (tempCardNumbers.includes(rndTemp)) {
+                console.log("Card Generation - Found duplicate, generating new number.");
+                randomNumber = Math.floor(Math.random() * (99 - 1 + 1) + 1);
             }
-        }
+            console.log("Card Generation - Finished executing duplicate check. Final number: " + randomNumber + ".");
 
-        var checkNumberAvailability = (number) => {
-            return new Boolean(this.availableNumbers[number - 1]);
-        }
-
-        var generateTest = () => {
-            var generatedNumbers = [];
-
-            var generatedValidation = (() => {
-                var temp = [];
-                for (var i = 0; i <= 9; i++) {
-                    temp.push(0);
-                }
-                return temp;
-            })();
-
-            var rndTemp;
-
-            var control = true;
-
-            for (var i = 0; i <= 14; i++) {
-                rndTemp = Math.floor(Math.random() * (99 - 1 + 1) + 1);
-
-                // Duplication check
-                while (generatedNumbers.includes(rndTemp)) {
+            console.log("Card Generation - Executing validation that no more than 3 exist in any category.")
+            while (whileControlVariable) {
+                if (generatedValidation[(parseInt(rndTemp / 10, 10))] > 2) {
                     rndTemp = Math.floor(Math.random() * (99 - 1 + 1) + 1);
-                }
 
-                // Check if the number is in ranges 1 - 9, 10 - 19 etc. and if more than 3 don't exist.
-                while (control) {
-                    console.log("if generatedValidation["+(parseInt(rndTemp / 10, 10))+"]");
-                    if (generatedValidation[(parseInt(rndTemp / 10, 10))] > 2) {
+                    // Duplication check
+                    while (tempCardNumbers.includes(rndTemp)) {
                         rndTemp = Math.floor(Math.random() * (99 - 1 + 1) + 1);
-
-                        // Duplication check
-                        while (generatedNumbers.includes(rndTemp)) {
-                            rndTemp = Math.floor(Math.random() * (99 - 1 + 1) + 1);
-                        }
-                    } else {
-                        generatedValidation[(parseInt(rndTemp / 10, 10))]++;
-                        control = false;
                     }
+                } else {
+                    generatedValidation[(parseInt(rndTemp / 10, 10))]++;
+                    whileControlVariable = false;
                 }
-
-                generatedNumbers[i] = rndTemp;
-                control = true;
             }
 
-            return generatedNumbers;
+            tempCardNumbers[i] = rndTemp;
+            whileControlVariable = true;
         }
-    }
 
+        this.cardNumbers = tempCardNumbers;
+    }
 };
 
 module.exports = cardModule;
