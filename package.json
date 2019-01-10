@@ -1,0 +1,23 @@
+{
+  "name": "bingoproject",
+  "version": "1.0.0",
+  "description": "Bingo Project for Effective JS week 1",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/ImErvin/Bingo.git"
+  },
+  "author": "Ervin Mamutov, Tangqi Feng, Rebekah Bowden",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ImErvin/Bingo/issues"
+  },
+  "homepage": "https://github.com/ImErvin/Bingo#readme",
+  "dependencies": {
+    "express": "4.16.4",
+    "socket.io": "2.2.0"
+  }
+}
