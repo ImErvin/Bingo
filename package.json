@@ -18,6 +18,7 @@
   "homepage": "https://github.com/ImErvin/Bingo#readme",
   "dependencies": {
     "express": "4.16.4",
-    "socket.io": "2.2.0"
+    "socket.io": "2.2.0",
+    "common-js": "0.3.8"
   }
 }
