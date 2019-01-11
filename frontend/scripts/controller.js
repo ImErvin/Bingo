@@ -22,6 +22,7 @@ var service = service;
                     //$('#cardNumbers').text(data.card.cardNumbers.sort((a, b) => a - b));
                     $('#username').text("Welcome, "+data.username);
                     // connection here
+                    service.connect(data.username);
                 })
                 .fail((error) => {
                     $('#messageFromServer').text(error.responseJSON);

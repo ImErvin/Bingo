@@ -61,12 +61,13 @@ io.on('connection', (socket) => {
 
     // the channel for add user to connected users
     socket.on('connected', (username) => {
+        console.log('is:'+username);
         GAME.players.push(users.find(u => u.username === username));
         console.log(GAME.players);
         gameplayers.push(username);
         console.log(gameplayers);
 
-        io.emit('player list', gameplayers);
+        io.emit('connected', gameplayers);
     });
 
     socket.on('disconnect', () => {

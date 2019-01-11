@@ -1,3 +1,4 @@
+var socket =  io();
 var service = {
     server: {
         url : "http://127.0.0.1:3101/",
@@ -10,6 +11,12 @@ var service = {
             data: JSON.stringify(user),
             dataType: "json",
             contentType: "application/json"
+        });
+    },
+    connect: function(username) {
+        socket.emit('connected', username);
+        socket.on('connected', function(players){
+            alert('hhhhh'+players);
         });
     }
 }
