@@ -45,7 +45,7 @@ userRouter.route('/users')
             users.push(newUser);
             res.statusCode = 200;
             res.json(JSON.stringify(newUser));
-        }else{
+        } else {
             res.statusCode = 409;
             res.json("User already exists");
         }
@@ -61,7 +61,7 @@ io.on('connection', (socket) => {
 
     // the channel for add user to connected users
     socket.on('connected', (username) => {
-        console.log('is:'+username);
+        console.log('is:' + username);
         GAME.players.push(users.find(u => u.username === username));
         console.log(GAME.players);
         gameplayers.push(username);
@@ -69,6 +69,51 @@ io.on('connection', (socket) => {
 
         io.emit('connected', gameplayers);
     });
+
+    socket.on('game', () => {
+        var number = 12;
+        setInterval(io.emit('game', 1), 3000);
+        
+    });
+
+    var spitOutNumbers = function (array) {
+
+        if (!array) {
+            var numbersInGame = (() => {
+                tempNumbers = new Array(90);
+                for (var i = 1; i <= 90; i++) {
+                    tempNumbers.push(i);
+                }
+
+                return tempNumbers;
+            })();
+
+            numbersInGame = shuffle(numbersInGame);
+        }
+        if (numbersInGame.length < 2) {
+            return {
+                returnedNumber: returnedNumber,
+                numbersInGame: null
+            };
+        } else {
+            var returnedNumber = numbersInGame[numbersInGame.length];
+
+            numbersInGame = numbersInGame.pop();
+            return {
+                returnedNumber: returnedNumber,
+                numbersInGame: numbersInGame
+            };
+        }
+
+    }
+
+    function shuffle(a) {
+        for (let i = a.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+    }
 
     socket.on('disconnect', () => {
         console.log("User Disconnected");

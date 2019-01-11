@@ -30,7 +30,7 @@ Card.prototype.generateCardNumbers = function(){
 
         console.log("Card Generation - Executing validation that no more than 3 exist in any category.")
         while (whileControlVariable) {
-            if (generatedValidation[(parseInt(randomNumber / 10, 10))] > 2) {
+            if (generatedValidation[(parseInt(randomNumber / 10, 10))] >= 2) {
                 console.log("Card Generation - Found excess amount of numbers in one category.")
                 randomNumber = Math.floor(Math.random() * (90 - 1 + 1) + 1);
 
