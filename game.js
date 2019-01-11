@@ -30,11 +30,13 @@ Game.prototype.gameTime = () => {
     return Math.floor((this.endTime - this.startTime)/1000);
 }
 
-var g = new Game();
-g.start();
-setTimeout(() => {
-    g.stop();
-    console.log(g.gameTime());
-}, 2000);
+module.exports = {
+    Game: Game
+};
 
-//console.log(g.gameTime());
+// var g = new Game();
+// g.start();
+// setTimeout(() => {
+//     g.stop();
+//     console.log(g.gameTime());
+// }, 2000);
