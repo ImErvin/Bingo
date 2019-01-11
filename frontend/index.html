@@ -11,7 +11,7 @@
 <body>
 
     <div class="container">
-        <div class="jumbotron mt-5 shadow-lg" id="loginPage">
+        <div class="jumbotron mt-5 shadow-lg bg-info" id="loginPage">
             <h1 class="lead text-center">BingoBangos</h1>
             <hr />
             <form id="loginForm" action="">
@@ -24,14 +24,31 @@
             </form>
         </div>
 
-        <div class="jumbotron mt-5 shadow-lg" id="gamePage">
-                <h1 class="lead text-center">BingoBangos</h1>
-                <hr />
-                <form id="loginForm" action="">
-                    <ul id="cardNumbers">
-                    </ul>
-                </form>
+        <div class="jumbotron mt-5 shadow-lg text-center bg-danger text-white" id="gamePage">
+            <h1 class="lead text-center">BingoBangos</h1>
+            <hr />
+            <h1 class="lead-2 text-center" id="username">Welcome, </h1>
+            <div class="card mx-auto text-dark" style="width: 18rem">
+                <div class="card-body text-center">
+                    <h3 class="lead-3">Numbers Draw</h3>
+                    <h4 class="lead-4" id="drawnNumber">#12</h4>
+                    <small>12, 13, 15, 66,</small>
+                </div>
             </div>
+            <div class="card text-dark mt-2 border-0">
+                <div class="card-header bg-dark text-white">Card Numbers</div>
+                <div class="card-body text-center" id="cardNumbers">
+
+                </div>
+                <div class="card-footer bg-dark"></div>
+            </div>
+            <div class="card text-white bg-dark border-0 text-center">
+                <div class="card-body " id="playersInGame">
+                    <h5>Active players</h5>
+                    <span class="badge badge-pill badge-info mr-2 p-2">Some Username</span>
+                </div>
+            </div>
+        </div>
     </div>
 
 

@@ -44,7 +44,7 @@ userRouter.route('/users')
             newUser.addCard(newCard);
             users.push(newUser);
             res.statusCode = 200;
-            res.json(JSON.stringify(users));
+            res.json(JSON.stringify(newUser));
         }else{
             res.statusCode = 409;
             res.json("User already exists");
@@ -57,18 +57,6 @@ userRouter.route('/users')
         console.log("get")
     });
 
-// userRouter.post('/', function(req, res){
-//     console.log('user: ' + req.body.username);
-//     //console.log('with card: '+ req.body.card);
-//     // check exist user
-//     if (!users.some(e => e.username === req.body.username) ){
-//         users.push(new user.User(req.body.username));
-//     }
-//     console.log(users);
-//     res.send('success!');
-
-// })
-
 io.on('connection', (socket) => {
 
     // the channel for add user to connected users
@@ -80,11 +68,6 @@ io.on('connection', (socket) => {
 
         io.emit('player list', gameplayers);
     });
-
-    // socket.on('chat message', (username, message) => {
-    //     console.log(username + " " + message);
-    //     io.emit('chat message', username + ": " +message);
-    // });
 
     socket.on('disconnect', () => {
         console.log("User Disconnected");
