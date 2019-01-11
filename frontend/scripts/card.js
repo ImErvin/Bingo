@@ -5,7 +5,7 @@ function Card(id) {
 
 Card.prototype = () => {
     var generateCardNumbers = () => {
-        var tempCardNumbers;
+        var tempCardNumbers = new Array(15);
         var generatedValidation = (() => {
             var temp = new Array(9);
             for (var i = 0; i <= 9; i++) {
@@ -19,37 +19,45 @@ Card.prototype = () => {
         console.log("Card Generation - Starting random number generation.")
         for (var i = 0; i <= 14; i++) {
 
-            randomNumber = Math.floor(Math.random() * (99 - 1 + 1) + 1);
+            randomNumber = Math.floor(Math.random() * (90 - 1 + 1) + 1);
             console.log("Card Generation - Generated number: " + randomNumber + ".");
 
             console.log("Card Generation - Executing duplicate check..");
-            while (tempCardNumbers.includes(rndTemp)) {
+            while (tempCardNumbers.includes(randomNumber)) {
                 console.log("Card Generation - Found duplicate, generating new number.");
-                randomNumber = Math.floor(Math.random() * (99 - 1 + 1) + 1);
+                randomNumber = Math.floor(Math.random() * (90 - 1 + 1) + 1);
             }
             console.log("Card Generation - Finished executing duplicate check. Final number: " + randomNumber + ".");
 
             console.log("Card Generation - Executing validation that no more than 3 exist in any category.")
             while (whileControlVariable) {
-                if (generatedValidation[(parseInt(rndTemp / 10, 10))] > 2) {
-                    rndTemp = Math.floor(Math.random() * (99 - 1 + 1) + 1);
+                if (generatedValidation[(parseInt(randomNumber / 10, 10))] > 2) {
+                    console.log("Card Generation - Found excess amount of numbers in one category.")
+                    randomNumber = Math.floor(Math.random() * (90 - 1 + 1) + 1);
 
-                    // Duplication check
-                    while (tempCardNumbers.includes(rndTemp)) {
-                        rndTemp = Math.floor(Math.random() * (99 - 1 + 1) + 1);
+                    console.log("Card Generation - Executing duplicate check..");
+                    while (tempCardNumbers.includes(randomNumber)) {
+                        console.log("Card Generation - Found duplicate, generating new number.");
+                        randomNumber = Math.floor(Math.random() * (90 - 1 + 1) + 1);
                     }
+                    console.log("Card Generation - Finished executing duplicate check. Final number: " + randomNumber + ".");
                 } else {
-                    generatedValidation[(parseInt(rndTemp / 10, 10))]++;
+                    generatedValidation[(parseInt(randomNumber / 10, 10))]++;
                     whileControlVariable = false;
                 }
             }
-
-            tempCardNumbers[i] = rndTemp;
+            console.log("Card Generation - Finished executing validation for categories.");
+            tempCardNumbers[i] = randomNumber;
             whileControlVariable = true;
+            console.log("Card Generation - Finished generating number, array so far: " + tempCardNumbers);
         }
 
-        this.cardNumbers = tempCardNumbers;
+        return tempCardNumbers;
+    }
+
+    return {
+        generateCardNumbers : generateCardNumbers
     }
 };
 
-module.exports = cardModule;
+module.exports = Card;
