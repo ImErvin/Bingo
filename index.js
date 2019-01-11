@@ -4,6 +4,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var bodyParser = require('body-parser');
 var user = require('./user');
+var path = require('path');
 
 // users arr
 var users = [];
@@ -16,6 +17,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(express.static('frontend'));
+app.use('/modules', express.static(path.join(__dirname, 'node_modules')));
+
 
 // ROUTES FOR OUR API
 var userRouter = express.Router();      // get an instance of the express Router
