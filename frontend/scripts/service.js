@@ -5,7 +5,7 @@ var service = {
     createUser: (user) =>{
         console.log("user");
         $.ajax({
-            url: this.server.url + "/user",
+            url: this.server.url + "/users",
             method: 'POST',
             data: JSON.stringify(user),
             dataType: "json",

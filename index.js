@@ -4,11 +4,8 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var bodyParser = require('body-parser');
 var user = require('./user');
-<<<<<<< HEAD
 var path = require('path');
-=======
 var game = require('./game');
->>>>>>> refs/remotes/origin/master
 
 // users array
 var users = [];
@@ -31,17 +28,32 @@ app.use('/modules', express.static(path.join(__dirname, 'node_modules')));
 // ROUTES FOR OUR API
 var userRouter = express.Router();      // get an instance of the express Router
 
-userRouter.post('/', function(req, res){
-    console.log('user: ' + req.body.username);
-    //console.log('with card: '+ req.body.card);
-    // check exist user
-    if (!users.some(e => e.username === req.body.username) ){
-        users.push(new user.User(req.body.username));
-    }
-    console.log(users);
-    res.send('success!');
-    
-})
+userRouter.route('/users')
+    .post((req, res) => {
+        if (!users.some(e => e.username === req.body.username)) {
+            users.push(new user.User(req.body.username));
+        }
+        console.log(users);
+        res.send('success!');
+    })
+    .delete((req, res) => {
+
+    })
+    .get((req, res) => {
+        console.log("get")
+    });
+
+// userRouter.post('/', function(req, res){
+//     console.log('user: ' + req.body.username);
+//     //console.log('with card: '+ req.body.card);
+//     // check exist user
+//     if (!users.some(e => e.username === req.body.username) ){
+//         users.push(new user.User(req.body.username));
+//     }
+//     console.log(users);
+//     res.send('success!');
+
+// })
 
 io.on('connection', (socket) => {
 
@@ -68,7 +80,7 @@ io.on('connection', (socket) => {
 
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /user
-app.use('/users', userRouter);
+app.use(userRouter);
 
 http.listen(3101, () => {
     console.log("Listening on port 3101")
