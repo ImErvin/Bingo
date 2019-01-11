@@ -4,10 +4,18 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var bodyParser = require('body-parser');
 var user = require('./user');
+<<<<<<< HEAD
 var path = require('path');
+=======
+var game = require('./game');
+>>>>>>> refs/remotes/origin/master
 
-// users arr
+// users array
 var users = [];
+// initial new game
+var GAME = new game.Game();
+// players array, just contain play's name
+var gameplayers = [];
 
 // console.log(new user.User('a'));
 
@@ -27,7 +35,6 @@ userRouter.post('/', function(req, res){
     console.log('user: ' + req.body.username);
     //console.log('with card: '+ req.body.card);
     // check exist user
-    console.log('yy '+users);
     if (!users.some(e => e.username === req.body.username) ){
         users.push(new user.User(req.body.username));
     }
@@ -38,14 +45,20 @@ userRouter.post('/', function(req, res){
 
 io.on('connection', (socket) => {
 
-    socket.on('connected', (message) => {
-        io.emit('connected', message);
+    // the channel for add user to connected users
+    socket.on('connected', (username) => {
+        GAME.players.push(users.find(u => u.username === username));
+        console.log(GAME.players);
+        gameplayers.push(username);
+        console.log(gameplayers);
+
+        io.emit('player list', gameplayers);
     });
 
-    socket.on('chat message', (username, message) => {
-        console.log(username + " " + message);
-        io.emit('chat message', username + ": " +message);
-    });
+    // socket.on('chat message', (username, message) => {
+    //     console.log(username + " " + message);
+    //     io.emit('chat message', username + ": " +message);
+    // });
 
     socket.on('disconnect', () => {
         console.log("User Disconnected");
@@ -55,7 +68,7 @@ io.on('connection', (socket) => {
 
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /user
-app.use('/user', userRouter);
+app.use('/users', userRouter);
 
 http.listen(3101, () => {
     console.log("Listening on port 3101")
