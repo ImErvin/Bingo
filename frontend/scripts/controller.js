@@ -1,17 +1,27 @@
 var service = service;
 
-function testCreateUser() {
-    $('loginForm').submit((event) => {
-        var user = {};
-        user.userName = $('usernameForm').val();
-        service.createUser(user).done((data) => {
-            alert("done");
-        })
-        .fail((error) => {
-            alert("error");
+(() => {
+    $(() => {
+
+        $('#gamePage').show();
+        $('#loginForm').submit((e) => {
+            e.preventDefault();
+            alert("Entered");
+            var user = {};
+            user.username = $('#usernameForm').val();
+            service.createUser(user)
+                .done((data) => {
+                    $('#messageFromServer').text(data);
+                    $('#loginPage').hide();
+                    $('#loginPage').prop('disabled', true);
+                    $('#gamePage').show();
+                })
+                .fail((error) => {
+                    console.log(error);
+                    $('#messageFromServer').text(error.responseJSON);
+                });
         });
-        
-        event.preventDefault();
-        return false;
+
+
     });
-}
+})();

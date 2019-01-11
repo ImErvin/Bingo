@@ -11,17 +11,27 @@
 <body>
 
     <div class="container">
-        <div class="jumbotron mt-5 shadow-lg">
+        <div class="jumbotron mt-5 shadow-lg" id="loginPage">
             <h1 class="lead text-center">BingoBangos</h1>
             <hr />
             <form id="loginForm" action="">
                 <div class="form-group">
+                    <h3 class="text-center" id="messageFromServer"></h3>
                     <label for="usernameForm">Username</label>
                     <input type="text" class="form-control" id="usernameForm" placeholder="Enter Username">
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
+
+        <div class="jumbotron mt-5 shadow-lg" id="gamePage">
+                <h1 class="lead text-center">BingoBangos</h1>
+                <hr />
+                <form id="loginForm" action="">
+                    <ul id="cardNumbers">
+                    </ul>
+                </form>
+            </div>
     </div>
 
 
@@ -32,6 +42,7 @@
         crossorigin="anonymous"></script>
     <script src="scripts/service.js"></script>
     <script src="scripts/controller.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
 </body>
 
 </html>

@@ -1,9 +1,9 @@
 function Card(id) {
     this.id = id;
-    this.cardNumbers = new Array();
+    this.cardNumbers = new Array(15);
 }
 
-Card.prototype.generateCardNumbers = () => {
+Card.prototype.generateCardNumbers = function(){
     var tempCardNumbers = new Array(15);
     var generatedValidation = (() => {
         var temp = new Array(9);
@@ -51,9 +51,10 @@ Card.prototype.generateCardNumbers = () => {
         console.log("Card Generation - Finished generating number, array so far: " + tempCardNumbers);
     }
 
-    return tempCardNumbers;
+    this.cardNumbers = tempCardNumbers;
 };
 
 module.exports = {
     Card: Card
 };
+

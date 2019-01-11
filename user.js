@@ -1,32 +1,32 @@
 // the user object
 function User(username){
     this.username = username;
-    this.card = null;
+    this.card = new Array();
     this.winTimes = 0;
     // can be more ...
 }
 
-User.prototype.addCard = (card) => {
+User.prototype.addCard = function(card){
     this.card = card;
 };
 
-User.prototype.getWinTimes = () => {
+User.prototype.getWinTimes =function(){
     return this.winTimes;
 };
 
-User.prototype.getCard = () => {
+User.prototype.getCard = function()  {
     return this.card;
 };
 
-User.prototype.win = () => {
+User.prototype.win = function()  {
     return this.winTimes ++;
 };
 
-User.prototype.getWinTimes = () => {
+User.prototype.getWinTimes = function()  {
     return this.winTimes;
 };
 
-User.prototype.removeCard = () => {
+User.prototype.removeCard = function()  {
     this.card = null;
 };
 

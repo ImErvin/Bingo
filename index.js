@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 var user = require('./user');
 var path = require('path');
 var game = require('./game');
+var card = require('./card');
 
 // users array
 var users = [];
@@ -24,6 +25,12 @@ app.use(bodyParser.json());
 app.use(express.static('frontend'));
 app.use('/modules', express.static(path.join(__dirname, 'node_modules')));
 
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
 
 // ROUTES FOR OUR API
 var userRouter = express.Router();      // get an instance of the express Router
@@ -31,10 +38,17 @@ var userRouter = express.Router();      // get an instance of the express Router
 userRouter.route('/users')
     .post((req, res) => {
         if (!users.some(e => e.username === req.body.username)) {
-            users.push(new user.User(req.body.username));
+            var newUser = new user.User(req.body.username);
+            var newCard = new card.Card("1");
+            newCard.generateCardNumbers();
+            newUser.addCard(newCard);
+            users.push(newUser);
+            res.statusCode = 200;
+            res.json(JSON.stringify(users));
+        }else{
+            res.statusCode = 409;
+            res.json("User already exists");
         }
-        console.log(users);
-        res.send('success!');
     })
     .delete((req, res) => {
 
